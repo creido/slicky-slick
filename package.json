@@ -1,0 +1,19 @@
+{
+  "name": "slicky-slick",
+  "version": "1.0.0",
+  "description": "Test piece for nested carousel interface",
+  "scripts": {
+    "start": "npm run open",
+    "open": "concurrently \"http-server -a 0.0.0.0 -p 1234\" \"open http://localhost:1234/\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/creido/slicky-slick"
+  },
+  "author": "creido",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "3.5.0",
+    "http-server": "0.10.0"
+  }
+}
