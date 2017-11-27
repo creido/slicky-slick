@@ -3,6 +3,7 @@
 }
 
 body {
+    background: #999;
     margin: 0;
 }
 
@@ -97,7 +98,8 @@ img {
 // }
 
 .slick-dots {
-    position: absolute;
+    // position: absolute;
+    border: 1px dotted red;
     bottom: 25px;
 
     display: block;
@@ -180,4 +182,137 @@ img {
 {
     opacity: .75;
     color: black;
+}
+
+
+
+/* Linked Slick */
+
+.slider-for {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+// .slider-for .content {
+//     height: 100vh;
+// }
+
+.slider .content {
+    color: #fff;
+    height: 100vh;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+.slider-nav {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+.slider-nav .content {
+    border: 1px solid white;
+    font-size: 36px;
+    padding-top: 20%;
+}
+
+h1 {
+    font: normal 3vw/1 sans-serif;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.slider-nav .slick-track {
+    // transition-delay: 500ms !important;
+}
+
+// add delay to foreground item appearing
+.slider-nav .slick-slide {
+    transition: opacity 500ms ease !important;
+}
+
+.slider-nav .slick-slide.slick-active {
+    // transition-delay: 1000ms !important;
+    // transition: opacity 1500ms ease 1500ms !important;
+}
+
+.slider-for .slick-slide.slick-active {
+    // transition-delay: 1500ms !important;
+}
+
+.bg {
+    bottom: 50%;
+    left: 50%;
+    min-height: 100%;
+    position: absolute;
+    transform: translate(-50%, 50%);
+    object-fit: cover;
+    z-index: 0;
+}
+
+.img-foreground {
+    bottom: 42%;
+    left: 50%;
+    max-width: 70%;
+    position: absolute;
+    transform: translate(-50%, 50%);
+    z-index: 0;
+}
+
+.slick-slide.p {
+    opacity: 1 !important;
+    pointer-events: none;
+    transform: translateX(-70%);
+    z-index: 1000 !important;
+}
+
+.slick-slide.n {
+    opacity: 1 !important;
+    pointer-events: none;
+    transform: translateX(70%);
+    z-index: 1000 !important;
+}
+
+.slick-arrow {
+    background: rgba(0,0,0,0.1);
+    border: none;
+    bottom: 0;
+    height: 100%;
+    outline: 0 none;
+    overflow: hidden;
+    padding: 0;
+    text-indent: 100%;
+    width: 15%;
+}
+.slick-prev {
+    left: 0;
+}
+.slick-next {
+    right: 0;
+}
+
+
+.masked-element {
+    mask-image: url(../img/cell-large.png);
+    mask-mode: alpha;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: bottom;
+}
+
+
+.content {
+    position: relative;
+    width: 100%;
+    z-index: 1;
 }
