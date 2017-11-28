@@ -178,52 +178,53 @@ const getNext = (currentIndex, len) => {
     return nextIndex;
 };
 
-const onAfter = (event, slick) => {
-    console.log(slick);
-
+const onInit = (event, slick) => {
     const currentIndex = slick.currentSlide;
     const len = slick.$slides.length;
-    const prevIndex = getPrev(currentIndex, len);
-    const nextIndex = getNext(currentIndex, len);
-    console.log(prevIndex, currentIndex, nextIndex);
 
-    slick.$slides[prevIndex].classList.add('p');
-    slick.$slides[nextIndex].classList.add('n');
+    slick.$slides.each((i, el) => {
+        const prevIndex = getPrev(i, len);
+        const nextIndex = getNext(i, len);
+
+        $(slick.$slides[prevIndex].querySelector('.img-foreground')).clone().addClass('p').appendTo($(el));
+        $(slick.$slides[nextIndex].querySelector('.img-foreground')).clone().addClass('n').appendTo($(el));
+    });
 };
+
+// const onAfter = (event, slick) => {
+//     console.log(slick);
+
+//     const currentIndex = slick.currentSlide;
+//     const len = slick.$slides.length;
+//     const prevIndex = getPrev(currentIndex, len);
+//     const nextIndex = getNext(currentIndex, len);
+
+//     console.log(prevIndex, currentIndex, nextIndex);
+
+//     slick.$slides[prevIndex].classList.add('p');
+//     slick.$slides[nextIndex].classList.add('n');
+// };
 
 const init = () => {
 
-    // background
-    $('.slider-for').slick({
-        arrows: false,
-        asNavFor: '.slider-nav',
-        fade: true,
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        speed: 1000,
-    });
+    const $slider = $('.slider');
 
-    $('.slider-nav').on('init', onAfter.bind(this));
+    $slider.on('init', onInit.bind(this));
 
-    // foreground
-    $('.slider-nav').on('beforeChange', (event, slick, currentSlide, nextSlide) => {
-        console.log(currentSlide);
+    // $slider.on('beforeChange', (event, slick, currentSlide, nextSlide) => {
+    //     console.log(currentSlide);
 
-        slick.$slides.removeClass('p n');
-    });
+    //     // slick.$slides.removeClass('p n');
+    // });
 
-    $('.slider-nav').on('afterChange', onAfter.bind(this));
+    // $slider.on('afterChange', onAfter.bind(this));
 
-    $('.slider-nav').slick({
+    $slider.slick({
         arrows: true,
-        asNavFor: '.slider-for',
         dots: true,
         fade: true,
         focusOnSelect: true,
         infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
         speed: 1500,
     });
 
