@@ -202,6 +202,11 @@ img {
     vertical-align: bottom;
 }
 
+.slide {
+    overflow: hidden;
+    position: relative;
+}
+
 .slider {
     bottom: 0;
     left: 0;
@@ -217,7 +222,6 @@ img {
     text-align: center;
     z-index: 1;
 
-    border: 1px solid white;
     padding-top: 20%;
 }
 
@@ -241,14 +245,16 @@ img {
     width: 84%;
     z-index: 1;
 
-    opacity: 0;
-    transition: opacity 1500ms ease 1500ms;
+    transition: opacity 1000ms ease;
 
     // mask: url(#mask-phantom);
 }
 
+.js .img-foreground {
+    opacity: 0;
+}
+
 .slick-arrow {
-    background: rgba(0,0,0,0.1);
     background: transparent;
     border: none;
     bottom: 0;
@@ -272,6 +278,11 @@ img {
 
 /* Transitions */
 
+.img-foreground.a {
+    opacity: 1;
+    transition-delay: 1000ms;
+}
+
 .img-foreground.p {
     transform: translate3d(-150%, 50%, 0);
 }
@@ -280,18 +291,8 @@ img {
     transform: translate3d(50%, 50%, 0);
 }
 
-.slick-slide {
-    // transition: opacity 500ms ease !important;
-}
-
-
-.slick-slide.slick-active .img-foreground {
-    opacity: 1;
-    transition-delay: 1000ms;
-}
-
-.slick-slide.slick-active .img-foreground.p,
-.slick-slide.slick-active .img-foreground.n {
+.img-foreground.p.a,
+.img-foreground.n.a {
     transition-delay: 2000ms;
 }
 
