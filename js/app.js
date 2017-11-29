@@ -247,7 +247,6 @@ const init = () => {
 
     $slider.slick({
         arrows: true,
-        cssEase: 'cubic-bezier(0.77, 0, 0.175, 1)',
         dots: true,
         fade: true,
         focusOnSelect: true,

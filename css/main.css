@@ -262,7 +262,7 @@ img {
 
     transition:
         filter 1000ms ease,
-        opacity 5000ms ease;
+        opacity 5000ms ease 500ms;
         /*opacity 5000ms cubic-bezier(0.77, 0, 0.175, 1);*/
 }
 
