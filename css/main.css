@@ -207,12 +207,32 @@ img {
     position: relative;
 }
 
-.slider {
+.no-js .slider {
+    overflow: visible;
+}
+
+.slider,
+.backgrounds {
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
+
+    overflow: hidden;
+}
+
+// .backgrounds::before {
+//     background: url('../img/02-GHOST-BG.jpg') no-repeat 50% 60%;
+//     background-size: 100% auto;
+//     content: '';
+//     filter: grayscale(1);
+//     filter: invert(1);
+//     z-index: -1;
+// }
+
+.backgrounds .img-background {
+
 }
 
 .slider .content {
@@ -236,12 +256,24 @@ img {
 
 .img-background {
     bottom: 40%;
+    opacity: 0;
     width: 100%;
     z-index: 0;
+
+    transition:
+        filter 1000ms ease,
+        opacity 5000ms ease;
+        /*opacity 5000ms cubic-bezier(0.77, 0, 0.175, 1);*/
+}
+
+.img-background.default {
+    filter: grayscale(1);
+    z-index: -1;
 }
 
 .img-foreground {
     bottom: 38.5%;
+    opacity: 0;
     width: 84%;
     z-index: 1;
 
@@ -250,8 +282,9 @@ img {
     // mask: url(#mask-phantom);
 }
 
-.js .img-foreground {
-    opacity: 0;
+.no-js .img-background,
+.no-js .img-foreground {
+    opacity: 1;
 }
 
 .slick-arrow {
@@ -278,22 +311,28 @@ img {
 
 /* Transitions */
 
-.img-foreground.a {
+.img-background.active,
+.img-background.default {
     opacity: 1;
-    transition-delay: 1000ms;
 }
 
-.img-foreground.p {
+.active .img-foreground {
+    opacity: 1;
+    transition-delay: 500ms;
+}
+
+.img-foreground.prev {
     transform: translate3d(-150%, 50%, 0);
 }
 
-.img-foreground.n {
+.img-foreground.next {
     transform: translate3d(50%, 50%, 0);
 }
 
-.img-foreground.p.a,
-.img-foreground.n.a {
-    transition-delay: 2000ms;
+.active .img-foreground.prev,
+.active .img-foreground.next {
+    transition-duration: 2500ms;
+    transition-delay: 1500ms;
 }
 
 

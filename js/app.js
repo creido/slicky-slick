@@ -158,13 +158,19 @@
 //     }
 // }
 
+const $slider = $('.slider');
+
+let $backgrounds; 
+
 const CSS_CLASS = {
     active: 'active',
+    default: 'default',
     prev: 'prev',
     next: 'next',
 };
 
 const SELECTORS = {
+    imageBackground: '.img-background',
     imageForeground: '.img-foreground',
 };
 
@@ -192,40 +198,61 @@ const onCarouselInit = (event, slick) => {
     const currentIndex = slick.currentSlide;
     const len = slick.$slides.length;
 
+    initSlideBackgrounds(slick, currentIndex);
+
     slick.$slides.each((i, el) => {
         const prevIndex = getPrev(i, len);
         const nextIndex = getNext(i, len);
 
-        $(slick.$slides[prevIndex].querySelector(SELECTORS.imageForeground)).clone().addClass(`${CSS_CLASS.active} ${CSS_CLASS.prev}`).appendTo($(el));
-        $(slick.$slides[nextIndex].querySelector(SELECTORS.imageForeground)).clone().addClass(`${CSS_CLASS.active} ${CSS_CLASS.next}`).appendTo($(el));
+        $(slick.$slides[prevIndex].querySelector(SELECTORS.imageForeground)).clone().addClass(CSS_CLASS.prev).appendTo($(el));
+        $(slick.$slides[nextIndex].querySelector(SELECTORS.imageForeground)).clone().addClass(CSS_CLASS.next).appendTo($(el));
     });
 
-    $(slick.$slides[currentIndex]).find(SELECTORS.imageForeground).addClass(CSS_CLASS.active);
+    slick.$slides[currentIndex].classList.add(CSS_CLASS.active);
 };
 
 const onCarouselBefore = (event, slick, currentSlide, nextSlide) => {
     const currentIndex = slick.currentSlide;
 
-    $(slick.$slides[currentSlide]).find(SELECTORS.imageForeground).removeClass(CSS_CLASS.active);
-    $(slick.$slides[nextSlide]).find(SELECTORS.imageForeground).addClass(CSS_CLASS.active);
+    slick.$slides[currentSlide].classList.remove(CSS_CLASS.active);
+    slick.$slides[nextSlide].classList.add(CSS_CLASS.active);
+
+    $background[currentSlide].classList.remove(CSS_CLASS.active);
+    $background[nextSlide].classList.add(CSS_CLASS.active);
+};
+
+const initSlideBackgrounds = (slick, currentIndex) => {
+    $backgrounds = $(`<div class="backgrounds"/>`);
+
+    slick.$slides.find(SELECTORS.imageBackground).appendTo($backgrounds);
+
+    $background = $backgrounds.find(SELECTORS.imageBackground);
+
+    // Create default as an omnipresent backplate to remain visible at all times.
+    $background.filter(':first').clone().appendTo($backgrounds).addClass(CSS_CLASS.default);
+
+    // Set active index
+    $background[currentIndex].classList.add(CSS_CLASS.active);
+
+    $backgrounds.prependTo($slider);
 };
 
 const init = () => {
-    const $slider = $('.slider');
 
     $slider.on('init', onCarouselInit.bind(this));
 
     $slider.on('beforeChange', onCarouselBefore.bind(this));
 
-    $slider.on('afterChange', () => console.log('after'));
+    // $slider.on('afterChange', () => console.log('after'));
 
     $slider.slick({
         arrows: true,
+        cssEase: 'cubic-bezier(0.77, 0, 0.175, 1)',
         dots: true,
         fade: true,
         focusOnSelect: true,
         infinite: true,
-        speed: 3000,
+        speed: 1000,
     });
 
     // if ($component.length) {
